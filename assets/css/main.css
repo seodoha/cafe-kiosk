@@ -37,13 +37,9 @@
   border: 1px solid #666;
 }
 
-#wrap .order-layout ul li a .thumb {
+#wrap .order-layout ul li a img {
   height: 150px;
   margin-bottom: 10px;
-}
-
-#wrap .order-layout ul li a .thumb img {
-  height: 100%;
 }
 
 #wrap .order-layout ul li a .tit {
