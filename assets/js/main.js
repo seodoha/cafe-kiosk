@@ -1,8 +1,9 @@
-import { Espresso, Water, Ice } from "./beverage.js";
+import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.js";
 
 // 모듈패턴
 ;const kioskApp = (function(kioskApp, window){
-    let coffeMenu = [];
+    let coffeMenu = [],
+        orderArr = [];
     const coffeList = document.getElementById("coffeMenu");
 
     kioskApp = {
@@ -87,11 +88,17 @@ import { Espresso, Water, Ice } from "./beverage.js";
         eventTrigger: () => {
             const self = kioskApp;
 
-            console.log(new Espresso());  // 에스프레소
-            console.log(Water(new Espresso()));  // 아메리카노
-            console.log(Ice(Water(new Espresso())));  // 아이스 아메리카노
-            console.log();  // 카페라떼
-            console.log();  // 아이스 카페라떼
+            console.log(new Beverage('espresso'));                          // 에스프레소
+            console.log(Water(new Beverage('americano')));                  // 아메리카노
+            console.log(Ice(Water(new Beverage('iceAmericano'))));          // 아이스 아메리카노
+            console.log(Milk(new Beverage('cafelatte')));                   // 카페라떼
+            console.log(Ice(Milk(new Beverage('iceCafelatte'))));           // 아이스 카페라떼
+            console.log(Banilla(Milk(new Beverage('banillalatte'))));       // 바닐라라떼
+            console.log(Ice(Banilla(Milk(new Beverage('iceBanillalatte')))));  // 아이스 바닐라라떼
+            console.log(Caramel(Milk(new Beverage('caramellatte'))));  // 카라멜라떼
+            console.log(Ice(Caramel(Milk(new Beverage('iceCaramelatte')))));  // 아이스 카라멜라떼
+            console.log(Mocha(Milk(new Beverage('cafemocha'))));  // 카페모카
+            console.log(Ice(Mocha(Milk(new Beverage('iceCafemocha')))));  // 아이스 카페모카
 
             coffeList.addEventListener('click', (e) => {
                 e.preventDefault();
