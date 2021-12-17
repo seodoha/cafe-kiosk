@@ -18,45 +18,28 @@
             장바구니
         </div>
     </div>
+
+    <div class="dim"></div>
+
+    <div class="layerPopup">
+        <div class="popHead">
+            아메리카노
+        </div>
+        <div class="popBody">
+            <fieldset>
+                <input type="radio" id="hotChk" checked>
+                <label for="">Hot</label>
+                <input type="radio" id="iceChk">
+                <label for="">Ice</label>
+            </fieldset>
+        </div>
+        <div class="popFoot">
+            <button id="btnCancel">취소</button>
+            <button id="btnOrder">주문</button>
+        </div>
+    </div>
     
     <script type="module" src="assets/js/beverage.js"></script>
     <script type="module" src="assets/js/main.js"></script>
-    <script>
-        class Animal {
-            constructor ( name ) {
-                this.name = name;
-            }
-        }
-
-        const FlyToMixin = (superclass) => class extends superclass {
-            flyTo (destination) {
-                console.log(`${this.name} is flying to the ${destination}`);
-            }
-        }
-        
-        const EatMixin = (superclass) => class extends superclass {
-            eat(food){
-                console.log(`${this.name} is eating ${food}`);
-            }
-        }
-
-        const SwimAtMixin = (superclass) => class extends superclass {
-            swimAt(place){
-                console.log(`${this.name} is swiming at the ${place}`)
-            }
-        }
-
-        // 믹스인을 탑재한 Mouse
-        class Mouse extends SwimAtMixin(EatMixin(Animal)) {
-            log() {
-                console.log(this);
-            }
-        }
-
-        const mickyMouse = new Mouse('Micky Mouse');
-        mickyMouse.swimAt('river');
-
-        console.log(mickyMouse.log());
-    </script>
 </body>
 </html>

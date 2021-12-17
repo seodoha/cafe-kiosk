@@ -4,18 +4,31 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
 ;const kioskApp = (function(kioskApp, window){
     let coffeMenu = [],
         orderArr = [];
-    const coffeList = document.getElementById("coffeMenu");
+    const coffeList = document.getElementById("coffeMenu"),
+          $dim = document.querySelectorAll(".dim")[0],
+          $layer = document.querySelectorAll(".layerPopup")[0];
+    
+    kioskApp.popup = {
+        open() {
+            $dim.classList.add("active");
+            $layer.classList.add("active");
+        },
+        close() {
+            $dim.classList.remove("active");
+            $layer.classList.remove("active");
+        },
+    };
 
-    kioskApp = {
+    kioskApp.app = {
         // 초기화
-        init: () => {
-            const self = kioskApp;
+        init() {
+            const self = kioskApp.app;
             
             self.menuFetch();           // DB에서 메뉴정보 받아오기 (가정)
             self.menuBind();            // 메뉴 바인딩
             self.eventTrigger();        // 이벤트 트리거 (이벤트 델리게이션 패턴 적용)
         },
-        menuFetch: () => {
+        menuFetch() {
             coffeMenu.push({
                 item : 'espresso',
                 src : 'assets/images/espresso.jpg',
@@ -58,7 +71,7 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                 price : 2500
             });
         },
-        menuBind: () => {
+        menuBind() {
             coffeMenu.map((obj) => {
                 const $el_li = document.createElement('li'),
                     $el_a = document.createElement('a'),
@@ -85,7 +98,7 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                 coffeList.append($el_li);
             });
         },
-        eventTrigger: () => {
+        eventTrigger() {
             const self = kioskApp;
 
             console.log(new Beverage('espresso'));                          // 에스프레소
@@ -105,12 +118,18 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                 const target = e.target || e.srcElement;
 
                 if ( target.parentNode.nodeName == 'A' || target.nodeName == 'A' ) {
-                    
+                    self.popup.open();
                 }
 
             });
+
+            document.getElementById('btnCancel').addEventListener('click', () => {
+                self.popup.close();
+            });
+
+
         },
     };
 
-    return kioskApp.init();
+    return kioskApp.app.init();
 })(window.kioskApp || {}, window);
