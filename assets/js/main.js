@@ -121,6 +121,14 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                     tempEl['item'] = target.parentNode.getAttribute('data-item'),
                     tempEl['title'] = $el[1].innerText,
                     tempEl['price'] = $el[2].innerText.split(' 원')[0];
+
+                    if ( tempEl.item != 'espresso' ) {
+                        popHead.innerText = tempEl['title'];
+                        self.popup.open();
+                    } else {
+                        orderArr.push(new Beverage(tempEl.item));
+                        console.log(orderArr);
+                    }
                 }
                 
                 if ( target.nodeName == 'A' ) {
@@ -129,10 +137,16 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                     tempEl['item'] = target.getAttribute('data-item'),
                     tempEl['title'] = $el[1].innerText,
                     tempEl['price'] = $el[2].innerText.split(' 원')[0];
+                    
+                    if ( tempEl.item != 'espresso' ) {
+                        popHead.innerText = tempEl['title'];
+                        self.popup.open();
+                    } else {
+                        orderArr.push(new Beverage(tempEl.item));
+                        console.log(orderArr);
+                    }
                 }
 
-                popHead.innerText = tempEl['title'];
-                self.popup.open();
             });
 
             document.getElementById('btnCancel').addEventListener('click', () => self.popup.close());
@@ -140,9 +154,6 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                 tempEl['type'] = popChk.checked ? 'hot' : 'ice';
                 
                 switch ( tempEl.item ) {
-                    case 'espresso':
-                        setEl =  new Beverage(tempEl.item);
-                        break;
                     case 'americano':
                         setEl = tempEl.type == 'hot' ? Water(new Beverage('americano')) : Ice(Water(new Beverage('iceAmericano')));
                         break;
@@ -166,6 +177,8 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                 self.popup.close();
                 tempEl = [];
                 setEl = [];
+
+                console.log(orderArr);
             });
 
 
