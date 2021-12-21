@@ -24,6 +24,16 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
         },
     };
 
+    kioskApp.cart = {
+        add(item) {
+            orderArr.push(item);
+            console.log(orderArr);
+        },
+        delete() {
+
+        },
+    };
+
     kioskApp.app = {
         // 초기화
         init() {
@@ -114,7 +124,7 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
             coffeList.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = e.target || e.srcElement;
-                
+
                 if ( target.parentNode.nodeName == 'A' ) {
                     let $el = target.parentNode.childNodes;
                     
@@ -126,8 +136,7 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                         popHead.innerText = tempEl['title'];
                         self.popup.open();
                     } else {
-                        orderArr.push(new Beverage(tempEl.item));
-                        console.log(orderArr);
+                        self.cart.add(new Beverage(tempEl.item));
                     }
                 }
                 
@@ -142,8 +151,7 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                         popHead.innerText = tempEl['title'];
                         self.popup.open();
                     } else {
-                        orderArr.push(new Beverage(tempEl.item));
-                        console.log(orderArr);
+                        self.cart.add(new Beverage(tempEl.item));
                     }
                 }
 
@@ -173,12 +181,10 @@ import { Beverage, Water, Milk, Ice, Banilla, Caramel, Mocha } from "./beverage.
                         break;
                 }
 
-                orderArr.push(setEl);
+                self.cart.add(setEl);
                 self.popup.close();
                 tempEl = [];
                 setEl = [];
-
-                console.log(orderArr);
             });
 
 
